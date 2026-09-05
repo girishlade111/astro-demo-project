@@ -1,12 +1,13 @@
 /**
  * SM-2 spaced repetition algorithm.
- * Ratings: 0 = Again, 1 = Hard, 2 = Good, 3 = Easy
+ * Quality: 0–5 (0–2 = failed/lapse, 3 = hard, 4 = good, 5 = easy)
  */
-export type Rating = 0 | 1 | 2 | 3;
+export type Quality = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface SchedulerState {
   easeFactor: number;
-  intervalDays: number;
+  /** Interval in days */
+  interval: number;
   repetitions: number;
 }
 
@@ -16,34 +17,33 @@ export interface ScheduledCard extends SchedulerState {
 
 export function schedule(
   state: SchedulerState,
-  rating: Rating,
+  quality: Quality,
   now: Date = new Date()
 ): ScheduledCard {
-  let { easeFactor, intervalDays, repetitions } = state;
+  let { easeFactor, interval, repetitions } = state;
 
-  if (rating === 0) {
+  if (quality < 3) {
+    // Lapse: relearn
     repetitions = 0;
-    intervalDays = 0; // relearn today
+    interval = 0;
   } else {
-    // Adjust ease factor per SM-2
-    const q = rating === 1 ? 3 : rating === 2 ? 4 : 5;
-    easeFactor = Math.max(1.3, easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
+    easeFactor = Math.max(1.3, easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
     repetitions += 1;
 
     if (repetitions === 1) {
-      intervalDays = rating === 1 ? 1 : 1;
+      interval = 1;
     } else if (repetitions === 2) {
-      intervalDays = rating === 1 ? 3 : rating === 3 ? 4 : 6;
+      interval = quality === 3 ? 3 : quality === 5 ? 4 : 6;
     } else {
-      intervalDays = Math.round(intervalDays * easeFactor);
-      if (rating === 1) intervalDays = Math.max(1, Math.round(intervalDays * 0.6));
-      if (rating === 3) intervalDays = Math.round(intervalDays * 1.3);
+      interval = Math.round(interval * easeFactor);
+      if (quality === 3) interval = Math.max(1, Math.round(interval * 0.6));
+      if (quality === 5) interval = Math.round(interval * 1.3);
     }
   }
 
   const dueDate = new Date(now);
-  dueDate.setDate(dueDate.getDate() + intervalDays);
-  if (rating === 0) dueDate.setMinutes(dueDate.getMinutes() + 10); // review in 10 min
+  dueDate.setDate(dueDate.getDate() + interval);
+  if (quality < 3) dueDate.setMinutes(dueDate.getMinutes() + 10); // relearn in 10 min
 
-  return { easeFactor, intervalDays, repetitions, dueDate };
+  return { easeFactor, interval, repetitions, dueDate };
 }
