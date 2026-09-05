@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db, createCard, createDeck, deleteCard, deleteDeck, parseCards, type Deck } from "@/lib/db";
+import { db, createCard, createDeck, deleteCard, deleteDeck, getAllDecks, parseCards, type Deck } from "@/lib/db";
 
 export default function DeckEditor() {
   const [newDeckName, setNewDeckName] = useState("");
@@ -10,7 +10,7 @@ export default function DeckEditor() {
   const [bulk, setBulk] = useState("");
   const [bulkOpen, setBulkOpen] = useState(false);
 
-  const decks = useLiveQuery(() => db.decks.orderBy("createdAt").toArray(), []);
+  const decks = useLiveQuery(() => getAllDecks(), []);
   const selectedDeck = decks?.find((d) => d.id === selectedDeckId) ?? null;
   const cards = useLiveQuery(
     () => (selectedDeckId ? db.cards.where("deckId").equals(selectedDeckId).toArray() : []),
@@ -74,6 +74,7 @@ export default function DeckEditor() {
               >
                 <button className="flex-1 text-left" onClick={() => setSelectedDeckId(deck.id!)}>
                   <span className="font-medium">{deck.name}</span>
+                  <span className="ml-2 text-sm text-slate-500">{deck.cardCount} cards</span>
                 </button>
                 <button
                   onClick={() => deleteDeck(deck.id!)}
