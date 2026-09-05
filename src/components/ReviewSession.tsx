@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db, logReview } from "@/lib/db";
-import { schedule, type Quality } from "@/lib/srs";
+import { schedule, type SM2Quality } from "@/lib/srs";
 
 // Map UI buttons to SM-2 quality: Again=0 (lapse), Hard=3, Good=4, Easy=5
-const RATINGS: Array<{ label: string; quality: Quality; className: string }> = [
+const RATINGS: Array<{ label: string; quality: SM2Quality; className: string }> = [
   { label: "Again", quality: 0, className: "bg-red-600 hover:bg-red-700" },
   { label: "Hard", quality: 3, className: "bg-amber-500 hover:bg-amber-600" },
   { label: "Good", quality: 4, className: "bg-emerald-600 hover:bg-emerald-700" },
@@ -21,7 +21,7 @@ export default function ReviewSession() {
     return cards[0] ?? null;
   }, []);
 
-  async function answer(quality: Quality) {
+  async function answer(quality: SM2Quality) {
     if (!dueCard?.id) return;
     const next = schedule(dueCard, quality);
     await logReview(dueCard.id, quality, next);
