@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "@/lib/db";
-import { schedule, type Rating } from "@/lib/srs";
+import { db, logReview } from "@/lib/db";
+import { schedule, type Quality } from "@/lib/srs";
 
-const RATINGS: Array<{ label: string; value: Rating; className: string }> = [
-  { label: "Again", value: 0, className: "bg-red-600 hover:bg-red-700" },
-  { label: "Hard", value: 1, className: "bg-amber-500 hover:bg-amber-600" },
-  { label: "Good", value: 2, className: "bg-emerald-600 hover:bg-emerald-700" },
-  { label: "Easy", value: 3, className: "bg-sky-600 hover:bg-sky-700" },
+// Map UI buttons to SM-2 quality: Again=0 (lapse), Hard=3, Good=4, Easy=5
+const RATINGS: Array<{ label: string; quality: Quality; className: string }> = [
+  { label: "Again", quality: 0, className: "bg-red-600 hover:bg-red-700" },
+  { label: "Hard", quality: 3, className: "bg-amber-500 hover:bg-amber-600" },
+  { label: "Good", quality: 4, className: "bg-emerald-600 hover:bg-emerald-700" },
+  { label: "Easy", quality: 5, className: "bg-sky-600 hover:bg-sky-700" },
 ];
 
 export default function ReviewSession() {
@@ -20,17 +21,10 @@ export default function ReviewSession() {
     return cards[0] ?? null;
   }, []);
 
-  async function answer(rating: Rating) {
+  async function answer(quality: Quality) {
     if (!dueCard?.id) return;
-    const { easeFactor, intervalDays, repetitions, dueDate } = schedule(dueCard, rating);
-    await db.cards.update(dueCard.id, {
-      easeFactor,
-      intervalDays,
-      repetitions,
-      dueDate,
-      updatedAt: new Date(),
-    });
-    await db.reviewLogs.add({ cardId: dueCard.id, rating, reviewedAt: new Date() });
+    const next = schedule(dueCard, quality);
+    await logReview(dueCard.id, quality, next);
     setRevealed(false);
   }
 
@@ -72,10 +66,10 @@ export default function ReviewSession() {
 
       {revealed && (
         <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {RATINGS.map(({ label, value, className }) => (
+          {RATINGS.map(({ label, quality, className }) => (
             <button
-              key={value}
-              onClick={() => answer(value)}
+              key={quality}
+              onClick={() => answer(quality)}
               className={`rounded-lg px-3 py-3 text-sm font-medium text-white transition ${className}`}
             >
               {label}
