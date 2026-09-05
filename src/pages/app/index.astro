@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DeckEditor from "@/components/DeckEditor";
+import ReviewSession from "@/components/ReviewSession";
+import ThemeToggle from "@/components/ThemeToggle";
+---
+
+<BaseLayout title="FlashStack — Study">
+  <header class="border-b border-slate-200 dark:border-slate-800">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+      <a href="/" class="flex items-center gap-2 font-bold">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-white">F</span>
+        FlashStack
+      </a>
+      <nav class="flex items-center gap-2">
+        <a
+          href="/app#edit"
+          class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Decks
+        </a>
+        <ThemeToggle client:load />
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <ReviewSession client:only="react" />
+    <div id="edit" class="border-t border-slate-200 dark:border-slate-800">
+      <DeckEditor client:only="react" />
+    </div>
+  </main>
+</BaseLayout>
