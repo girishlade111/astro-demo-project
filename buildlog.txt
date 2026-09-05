@@ -29,3 +29,27 @@
 [2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/db.BMURW2H8.js             [39m[1m[2m 99.69 kB[22m[1m[22m[2m Γöé gzip: 33.59 kB[22m
 [2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/client.mNKXRToU.js         [39m[1m[2m186.62 kB[22m[1m[22m[2m Γöé gzip: 58.54 kB[22m
 [2m13:19:39[22m [34m[vite][39m [32mΓ£ô built in 2.73s[39m
+
+PWA v0.21.2
+mode      generateSW
+precache  12 entries (313.29 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-9c191d2f.js
+
+[42m[30m generating static routes [39m[49m
+[2m13:19:43[22m [32mΓû╢[39m src/pages/app/index.astro
+[2m13:19:43[22m   [34mΓööΓöÇ[39m [2m/app/index.html[22m [2m(+18ms)[22m 
+[2m13:19:43[22m [32mΓû╢[39m src/pages/index.astro
+[2m13:19:43[22m   [34mΓööΓöÇ[39m [2m/index.html[22m [2m(+4ms)[22m 
+[2m13:19:43[22m [32mΓ£ô Completed in 60ms.
+[39m
+
+PWA v0.21.2
+mode      generateSW
+precache  14 entries (327.65 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-9c191d2f.js
+[2m13:19:44[22m [34m[build][39m 2 page(s) built in [1m9.88s[22m
+[2m13:19:44[22m [34m[build][39m [1mComplete![22m
