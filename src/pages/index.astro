@@ -1,0 +1,77 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ThemeToggle from "@/components/ThemeToggle";
+---
+
+<BaseLayout>
+  <header class="mx-auto flex max-w-5xl items-center justify-between px-4 py-6">
+    <a href="/" class="flex items-center gap-2 font-bold">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-white">F</span>
+      FlashStack
+    </a>
+    <div class="flex items-center gap-3">
+      <ThemeToggle client:load />
+      <a
+        href="/app"
+        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+      >
+        Open app
+      </a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4">
+    <section class="py-16 text-center sm:py-24">
+      <h1 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+        Flashcards that live
+        <span class="text-indigo-600 dark:text-indigo-400">on your device</span>
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
+        FlashStack is a local-first flashcard app. Create decks, study with spaced repetition,
+        and keep full ownership of your data — no account, no server, works offline.
+      </p>
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a
+          href="/app"
+          class="w-full rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 sm:w-auto"
+        >
+          Start studying
+        </a>
+        <a
+          href="#features"
+          class="w-full rounded-xl border border-slate-300 px-8 py-3 font-semibold transition hover:bg-slate-100 sm:w-auto dark:border-slate-700 dark:hover:bg-slate-800"
+        >
+          Learn more
+        </a>
+      </div>
+    </section>
+
+    <section id="features" class="grid gap-6 pb-20 sm:grid-cols-3">
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <h2 class="font-semibold">🔒 Local-first</h2>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          All decks and review history are stored in IndexedDB on your device. Nothing leaves
+          your browser.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <h2 class="font-semibold">🧠 Smart scheduling</h2>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Built-in SM-2 spaced repetition shows you cards right before you're likely to
+          forget them.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <h2 class="font-semibold">📴 Works offline</h2>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Installable PWA with full offline support. Study on the plane, in the subway,
+          anywhere.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800">
+    FlashStack — your cards, your device.
+  </footer>
+</BaseLayout>
