@@ -36,6 +36,26 @@ export default function DeckEditor() {
   async function handleBulkImport() {
     if (!selectedDeckId || !bulk.trim()) return;
     const parsed = parseCards(bulk);
+    const now = new Date();
+    await db.cards.bulkAdd(
+      parsed.map((c) => ({
+        deckId: selectedDeckId,
+        front: c.front,
+        back: c.back,
+        easeFactor: 2.5,
+        intervalDays: 0,
+        repetitions: 0,
+        dueDate: now,
+        createdAt: now,
+        updatedAt: now,
+      }))
+    );
+    setBulk("");
+  }
+
+  async function handleBulkImport() {
+    if (!selectedDeckId || !bulk.trim()) return;
+    const parsed = parseCards(bulk);
     await db.cards.bulkAdd(
       parsed.map((c) => ({
         deckId: selectedDeckId,
