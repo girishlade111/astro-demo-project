@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db, addCard, createDeck, deleteDeck, parseCards, type Deck } from "@/lib/db";
+import { db, createCard, createDeck, deleteCard, deleteDeck, parseCards, type Deck } from "@/lib/db";
 
 export default function DeckEditor() {
   const [newDeckName, setNewDeckName] = useState("");
@@ -28,7 +28,7 @@ export default function DeckEditor() {
   async function handleAddCard(e: React.FormEvent) {
     e.preventDefault();
     if (!selectedDeckId || !front.trim() || !back.trim()) return;
-    await addCard(selectedDeckId, front.trim(), back.trim());
+    await createCard(selectedDeckId, front.trim(), back.trim());
     setFront("");
     setBack("");
   }
@@ -36,20 +36,9 @@ export default function DeckEditor() {
   async function handleBulkImport() {
     if (!selectedDeckId || !bulk.trim()) return;
     const parsed = parseCards(bulk);
-    const now = new Date();
-    await db.cards.bulkAdd(
-      parsed.map((c) => ({
-        deckId: selectedDeckId,
-        front: c.front,
-        back: c.back,
-        easeFactor: 2.5,
-        intervalDays: 0,
-        repetitions: 0,
-        dueDate: now,
-        createdAt: now,
-        updatedAt: now,
-      }))
-    );
+    for (const card of parsed) {
+      await createCard(selectedDeckId, card.front, card.back);
+    }
     setBulk("");
   }
 
@@ -165,7 +154,7 @@ export default function DeckEditor() {
                     <p className="truncate text-sm text-slate-500">{card.back}</p>
                   </div>
                   <button
-                    onClick={() => db.cards.delete(card.id!)}
+                    onClick={() => deleteCard(card.id!)}
                     className="shrink-0 text-sm text-red-500 hover:text-red-700"
                     aria-label="Delete card"
                   >
