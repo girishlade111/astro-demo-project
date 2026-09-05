@@ -2,3 +2,30 @@
 > flashstack@0.1.0 build
 > astro build
 
+[2m13:19:34[22m [34m[content][39m Syncing content
+[2m13:19:34[22m [34m[content][39m Synced content
+[2m13:19:34[22m [34m[types][39m Generated [2m70ms[22m
+[2m13:19:34[22m [34m[build][39m output: [34m"static"[39m
+[2m13:19:34[22m [34m[build][39m mode: [34m"static"[39m
+[2m13:19:34[22m [34m[build][39m directory: [34mC:\Users\Girish Lade\OneDrive\Desktop\ASTRO DEMO PROJECT\dist\[39m
+[2m13:19:34[22m [34m[build][39m Collecting build info...
+[2m13:19:34[22m [34m[build][39m [32mΓ£ô Completed in 98ms.[39m
+[2m13:19:34[22m [34m[build][39m Building static entrypoints...
+[2m13:19:37[22m [34m[vite][39m [32mΓ£ô built in 2.02s[39m
+[2m13:19:37[22m [34m[build][39m [32mΓ£ô Completed in 2.08s.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m13:19:37[22m [34m[vite][39m transforming...
+[2m13:19:39[22m [34m[vite][39m [32mΓ£ô[39m 39 modules transformed.
+[2m13:19:39[22m [34m[vite][39m rendering chunks...
+[2m13:19:39[22m [34m[vite][39m computing gzip size...
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[32mregisterSW.js                     [39m[1m[2m  0.13 kB[22m[1m[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[32mmanifest.webmanifest              [39m[1m[2m  0.28 kB[22m[1m[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/jsx-runtime.D_zvdyIk.js    [39m[1m[2m  0.73 kB[22m[1m[22m[2m Γöé gzip:  0.46 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/ThemeToggle.E5lfb1tJ.js    [39m[1m[2m  1.73 kB[22m[1m[22m[2m Γöé gzip:  0.80 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/ReviewSession.CmzPp67v.js  [39m[1m[2m  2.53 kB[22m[1m[22m[2m Γöé gzip:  1.13 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/DeckEditor.x6D_ANX3.js     [39m[1m[2m  4.52 kB[22m[1m[22m[2m Γöé gzip:  1.46 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/index.CUr1qghD.js          [39m[1m[2m  8.10 kB[22m[1m[22m[2m Γöé gzip:  3.15 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/db.BMURW2H8.js             [39m[1m[2m 99.69 kB[22m[1m[22m[2m Γöé gzip: 33.59 kB[22m
+[2m13:19:39[22m [34m[vite][39m [2mdist/[22m[36m_astro/client.mNKXRToU.js         [39m[1m[2m186.62 kB[22m[1m[22m[2m Γöé gzip: 58.54 kB[22m
+[2m13:19:39[22m [34m[vite][39m [32mΓ£ô built in 2.73s[39m
