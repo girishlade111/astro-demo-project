@@ -77,6 +77,13 @@ export async function deleteDeck(deckId: number): Promise<void> {
   });
 }
 
+export async function updateDeck(
+  deckId: number,
+  changes: Partial<Pick<Deck, "name" | "description">>
+): Promise<void> {
+  await db.decks.update(deckId, { ...changes, updatedAt: new Date() });
+}
+
 export async function getAllDecks(): Promise<Deck[]> {
   return db.decks.orderBy("createdAt").toArray();
 }

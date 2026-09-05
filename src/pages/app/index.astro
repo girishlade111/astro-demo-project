@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import DeckEditor from "@/components/DeckEditor";
+import DeckManager from "@/components/DeckManager";
 import ReviewSession from "@/components/ReviewSession";
 import ThemeToggle from "@/components/ThemeToggle";
 ---
@@ -13,12 +13,6 @@ import ThemeToggle from "@/components/ThemeToggle";
         FlashStack
       </a>
       <nav class="flex items-center gap-2">
-        <a
-          href="/app#edit"
-          class="rounded-lg px-3 py-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
-        >
-          Decks
-        </a>
         <ThemeToggle client:load />
       </nav>
     </div>
@@ -26,8 +20,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 
   <main>
     <ReviewSession client:only="react" />
-    <div id="edit" class="border-t border-slate-200 dark:border-slate-800">
-      <DeckEditor client:only="react" />
+    <div class="border-t border-slate-200 dark:border-slate-800">
+      <DeckManager client:only="react" />
     </div>
   </main>
 </BaseLayout>
