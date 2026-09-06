@@ -4,9 +4,18 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: "website" | "article";
 }
 
-const { title = "FlashStack — Local-first flashcards", description = "A local-first flashcard app. Your data stays on your device." } = Astro.props;
+const {
+  title = "FlashStack — Local-first flashcards",
+  description = "A local-first flashcard app. Your data stays on your device. No account, no server, works offline.",
+  image = "/favicon.svg",
+  type = "website",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://flashstack.app").toString();
 ---
 
 <!doctype html>
@@ -18,6 +27,33 @@ const { title = "FlashStack — Local-first flashcards", description = "A local-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, "https://flashstack.app").toString()} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, "https://flashstack.app").toString()} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "FlashStack",
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "Any (PWA)",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      description: "A local-first flashcard app with spaced repetition. Your data stays on your device. No account, no server, works offline.",
+      url: "https://flashstack.app",
+    })} />
+
     <script is:inline>
       // Apply theme before paint to avoid flash
       const stored = localStorage.getItem("flashstack-theme");
