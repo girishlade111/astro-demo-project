@@ -3,6 +3,9 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db, getCardsDueToday, logReview, type Card } from "@/lib/db";
 import { calculateNextReview, type SM2Quality } from "@/lib/sm2";
 
+const inputCls =
+  "rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700";
+
 /** Rating buttons mapped to SM-2 quality + keyboard shortcut. */
 const RATINGS: Array<{
   label: string;
@@ -189,6 +192,7 @@ function ReviewBody({
       </div>
     );
   }
+  if (!card) return null;
 
   const done = total - remaining;
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;

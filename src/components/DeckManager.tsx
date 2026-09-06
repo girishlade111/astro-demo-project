@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db, createDeck, deleteDeck, updateDeck, type Deck } from "@/lib/db";
 import CardEditor from "@/components/CardEditor";
+import AnkiImporter from "@/components/AnkiImporter";
 
 const inputCls =
   "w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700";
 const btnPrimary =
   "rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700";
+const btnGhost =
+  "rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800";
 
 export default function DeckManager() {
   const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null);
@@ -71,6 +74,7 @@ function DeckListView({
   const [pendingDelete, setPendingDelete] = useState<Deck | null>(null);
   const [renamingId, setRenamingId] = useState<number | null>(null);
   const [renameValue, setRenameValue] = useState("");
+  const [showImport, setShowImport] = useState(false);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
@@ -115,6 +119,9 @@ function DeckListView({
             Create
           </button>
         </form>
+        <button onClick={() => setShowImport(true)} className={btnGhost}>
+          📦 Import Anki
+        </button>
         <div className="flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700">
           {(["grid", "list"] as const).map((v) => (
             <button
@@ -191,6 +198,12 @@ function DeckListView({
               Delete deck
             </button>
           </div>
+        </Modal>
+      )}
+
+      {showImport && (
+        <Modal title="Import from Anki" onClose={() => setShowImport(false)}>
+          <AnkiImporter onDone={() => setShowImport(false)} />
         </Modal>
       )}
     </div>
