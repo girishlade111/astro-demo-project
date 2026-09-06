@@ -1,9 +1,14 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ThemeToggle from "@/components/ThemeToggle";
+import DonateButton from "@/components/DonateButton";
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="FlashStack — Local-first flashcards with spaced repetition"
+  description="Create decks, study with SM-2 spaced repetition, and keep full ownership of your data. No account, no server, works offline. Free and open source."
+  image="/og-image.png"
+>
   <header class="mx-auto flex max-w-5xl items-center justify-between px-4 py-6">
     <a href="/" class="flex items-center gap-2 font-bold">
       <span class="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-white">F</span>
@@ -15,19 +20,20 @@ import ThemeToggle from "@/components/ThemeToggle";
         href="/app"
         class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
       >
-        Open app
+        Open App
       </a>
     </div>
   </header>
 
   <main class="mx-auto max-w-5xl px-4">
-    <section class="py-16 text-center sm:py-24">
-      <h1 class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+    <!-- Hero Section -->
+    <section class="py-16 text-center sm:py-24" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
         Flashcards that live
         <span class="text-indigo-600 dark:text-indigo-400">on your device</span>
       </h1>
       <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-        FlashStack is a local-first flashcard app. Create decks, study with spaced repetition,
+        FlashStack is a local-first flashcard app. Create decks, study with SM-2 spaced repetition,
         and keep full ownership of your data — no account, no server, works offline.
       </p>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -35,43 +41,254 @@ import ThemeToggle from "@/components/ThemeToggle";
           href="/app"
           class="w-full rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700 sm:w-auto"
         >
-          Start studying
+          Start Studying →
         </a>
         <a
           href="#features"
           class="w-full rounded-xl border border-slate-300 px-8 py-3 font-semibold transition hover:bg-slate-100 sm:w-auto dark:border-slate-700 dark:hover:bg-slate-800"
         >
-          Learn more
+          Learn More
         </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+        <span class="flex items-center gap-1.5">🔒 100% Local-first</span>
+        <span class="flex items-center gap-1.5">📴 Works Offline</span>
+        <span class="flex items-center gap-1.5">🧠 SM-2 Algorithm</span>
+        <span class="flex items-center gap-1.5">📦 Import/Export Anki</span>
+        <span class="flex items-center gap-1.5">💰 Free & Open Source</span>
       </div>
     </section>
 
-    <section id="features" class="grid gap-6 pb-20 sm:grid-cols-3">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <h2 class="font-semibold">🔒 Local-first</h2>
+    <!-- Features Grid -->
+    <section id="features" class="grid gap-6 pb-20 sm:grid-cols-3" aria-labelledby="features-title">
+      <h2 id="features-title" class="sr-only">Key Features</h2>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">🔒</div>
+        <h3 class="mt-3 font-semibold">Local-first & Private</h3>
         <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          All decks and review history are stored in IndexedDB on your device. Nothing leaves
-          your browser.
+          All decks, cards, and review history live in IndexedDB on your device. Nothing ever leaves your browser. No account required.
         </p>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">🧠</div>
+        <h3 class="mt-3 font-semibold">SM-2 Spaced Repetition</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Battle-tested algorithm schedules reviews right before you forget. Adjustable ease factor, learning steps, and custom intervals.
+        </p>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">📴</div>
+        <h3 class="mt-3 font-semibold">Full Offline Support</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Installable PWA with service worker caching. Study on the plane, in the subway, or anywhere without internet.
+        </p>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">🤖</div>
+        <h3 class="mt-3 font-semibold">AI Flashcard Generator</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Paste notes or upload a PDF. Bring your own API key (Anthropic/OpenAI) to generate cards locally. You pay the provider directly.
+        </p>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">📦</div>
+        <h3 class="mt-3 font-semibold">Anki Import / Export</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Seamlessly migrate from Anki. Import .apkg files with media. Export single decks or all decks back to Anki format.
+        </p>
+      </article>
+
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="text-3xl">💾</div>
+        <h3 class="mt-3 font-semibold">Full Data Portability</h3>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Export complete JSON backup (decks, cards, review logs). Import to restore. Your data, your control — always.
+        </p>
+      </article>
+    </section>
+
+    <!-- Screenshots / App Preview -->
+    <section id="preview" class="py-20" aria-labelledby="preview-title">
+      <h2 id="preview-title" class="sr-only">App Preview</h2>
+      <div class="mx-auto max-w-5xl px-4">
+        <div class="mb-8 text-center">
+          <h3 class="text-2xl font-bold sm:text-3xl">See FlashStack in Action</h3>
+          <p class="mt-2 text-slate-600 dark:text-slate-400">
+            Clean, distraction-free interface designed for focused studying.
+          </p>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <figure class="rounded-xl border border-slate-200 overflow-hidden shadow-lg dark:border-slate-800">
+            <figcaption class="bg-slate-50 px-4 py-3 text-sm font-medium dark:bg-slate-900">Deck Manager</figcaption>
+            <div class="aspect-video bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <svg class="h-16 w-16 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M9 3v18" />
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="rounded-xl border border-slate-200 overflow-hidden shadow-lg dark:border-slate-800">
+            <figcaption class="bg-slate-50 px-4 py-3 text-sm font-medium dark:bg-slate-900">Review Session</figcaption>
+            <div class="aspect-video bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <svg class="h-16 w-16 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="rounded-xl border border-slate-200 overflow-hidden shadow-lg dark:border-slate-800">
+            <figcaption class="bg-slate-50 px-4 py-3 text-sm font-medium dark:bg-slate-900">AI Generator</figcaption>
+            <div class="aspect-video bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+              <svg class="h-16 w-16 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M12 19a7 7 0 0 0 7-7" />
+                <path d="M5 12a7 7 0 0 1 7-7" />
+                <path d="M19 12a7 7 0 0 1-7 7" />
+                <path d="M17 17c-2.5-1-6-1-8.5 0" />
+              </svg>
+            </div>
+          </figure>
+        </div>
       </div>
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <h2 class="font-semibold">🧠 Smart scheduling</h2>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Built-in SM-2 spaced repetition shows you cards right before you're likely to
-          forget them.
-        </p>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="py-20 bg-slate-50 dark:bg-slate-900" aria-labelledby="how-title">
+      <h2 id="how-title" class="sr-only">How It Works</h2>
+      <div class="mx-auto max-w-5xl px-4">
+        <div class="mb-12 text-center">
+          <h3 class="text-2xl font-bold sm:text-3xl">Three Steps to Better Memory</h3>
+        </div>
+
+        <ol class="grid gap-8 sm:grid-cols-3">
+          <li class="relative">
+            <span class="absolute -top-4 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold text-xl">1</span>
+            <div class="pt-6 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+              <h4 class="font-semibold">Create or Import</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Build decks manually, paste text with AI generation, or import your existing Anki .apkg files.
+              </p>
+            </div>
+          </li>
+          <li class="relative">
+            <span class="absolute -top-4 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold text-xl">2</span>
+            <div class="pt-6 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+              <h4 class="font-semibold">Study with SM-2</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Review cards daily. The algorithm adapts to your performance — hard cards appear more often, easy ones less.
+              </p>
+            </div>
+          </li>
+          <li class="relative">
+            <span class="absolute -top-4 left-1/2 -translate-x-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-indigo-600 text-white font-bold text-xl">3</span>
+            <div class="pt-6 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+              <h4 class="font-semibold">Retain Forever</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                Track progress with stats. Export to Anki or JSON anytime. Your knowledge base grows with you.
+              </p>
+            </div>
+          </li>
+        </ol>
       </div>
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-        <h2 class="font-semibold">📴 Works offline</h2>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Installable PWA with full offline support. Study on the plane, in the subway,
-          anywhere.
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="sr-only">Frequently Asked Questions</h2>
+      <div class="mx-auto max-w-3xl px-4">
+        <div class="mb-10 text-center">
+          <h3 class="text-2xl font-bold sm:text-3xl">Common Questions</h3>
+        </div>
+
+        <dl class="space-y-4" aria-label="FAQ">
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">Is my data really private?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Yes. Everything is stored in your browser's IndexedDB. No server, no analytics, no tracking. You own your data completely.
+            </dd>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">Does it work offline?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Yes. Once loaded, the PWA caches all assets. You can study, create cards, and review without any internet connection.
+            </dd>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">Can I import from Anki?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Yes. Drop an .apkg file and FlashStack extracts cards, media, and scheduling data. Cloze cards are supported too.
+            </dd>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">How does AI generation work?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              You provide your own Anthropic or OpenAI API key (stored locally). The app calls the provider directly from your browser — you pay them, not us.
+            </dd>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">Can I export back to Anki?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Yes. Export a single deck or all decks as .apkg files compatible with Anki desktop, AnkiDroid, and AnkiMobile.
+            </dd>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+            <dt class="font-semibold">Is it really free?</dt>
+            <dd class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Yes. FlashStack is free and open source. No ads, no subscriptions, no paywalls. Donations are welcome but never required.
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Donation / Support -->
+    <section id="support" class="py-20 bg-indigo-50 dark:bg-indigo-950/30" aria-labelledby="support-title">
+      <div class="mx-auto max-w-3xl px-4 text-center">
+        <h3 id="support-title" class="text-2xl font-bold sm:text-3xl">Find FlashStack useful?</h3>
+        <p class="mt-2 text-slate-600 dark:text-slate-400">
+          It's free, local-first, and ad-free. If it helps you learn, consider supporting development.
         </p>
+        <DonateButton client:load message="FlashStack is free, local-first, and ad-free. If it helps you study, consider a coffee ☕" />
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 text-center" aria-labelledby="cta-title">
+      <h2 id="cta-title" class="sr-only">Get Started</h2>
+      <div class="mx-auto max-w-2xl px-4">
+        <h3 class="text-2xl font-bold sm:text-3xl">Ready to study smarter?</h3>
+        <p class="mt-4 text-slate-600 dark:text-slate-400">
+          Open the app and create your first deck in seconds. No sign-up required.
+        </p>
+        <a
+          href="/app"
+          class="mt-8 inline-block rounded-xl bg-indigo-600 px-8 py-3 font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-700"
+        >
+          Start Studying Now →
+        </a>
       </div>
     </section>
   </main>
 
   <footer class="border-t border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800">
-    FlashStack — your cards, your device.
+    <p>FlashStack — your cards, your device.</p>
+    <p class="mt-1">
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="underline hover:text-indigo-600">GitHub</a>
+      · <a href="/app" class="underline hover:text-indigo-600">Open App</a>
+    </p>
   </footer>
 </BaseLayout>

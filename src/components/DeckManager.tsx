@@ -4,6 +4,8 @@ import { db, createDeck, deleteDeck, updateDeck, type Deck } from "@/lib/db";
 import CardEditor from "@/components/CardEditor";
 import AnkiImporter from "@/components/AnkiImporter";
 import AIGenerator from "@/components/AIGenerator";
+import Settings from "@/components/Settings";
+import Exporter from "@/components/Exporter";
 
 const inputCls =
   "w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700";
@@ -77,6 +79,8 @@ function DeckListView({
   const [renameValue, setRenameValue] = useState("");
   const [showImport, setShowImport] = useState(false);
   const [showAI, setShowAI] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showExport, setShowExport] = useState(false);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
