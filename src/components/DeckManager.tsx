@@ -125,12 +125,20 @@ function DeckListView({
             Create
           </button>
         </form>
-        <button onClick={() => setShowImport(true)} className={btnGhost}>
-          📦 Import Anki
-        </button>
-        <button onClick={() => setShowAI(true)} className={btnGhost}>
-          ✨ AI Generate
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={() => setShowImport(true)} className={btnGhost}>
+            📦 Import Anki
+          </button>
+          <button onClick={() => setShowAI(true)} className={btnGhost}>
+            ✨ AI Generate
+          </button>
+          <button onClick={() => setShowExport(true)} className={btnGhost}>
+            📤 Export
+          </button>
+          <button onClick={() => setShowSettings(true)} className={btnGhost}>
+            ⚙️ Settings
+          </button>
+        </div>
         <div className="flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700">
           {(["grid", "list"] as const).map((v) => (
             <button
@@ -219,6 +227,18 @@ function DeckListView({
       {showAI && (
         <Modal title="AI Flashcard Generator" wide onClose={() => setShowAI(false)}>
           <AIGenerator onDone={() => setShowAI(false)} />
+        </Modal>
+      )}
+
+      {showExport && (
+        <Modal title="Export Data" wide onClose={() => setShowExport(false)}>
+          <Exporter onDone={() => setShowExport(false)} />
+        </Modal>
+      )}
+
+      {showSettings && (
+        <Modal title="Settings" wide onClose={() => setShowSettings(false)}>
+          <Settings onClose={() => setShowSettings(false)} />
         </Modal>
       )}
     </div>
