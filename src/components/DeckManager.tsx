@@ -3,6 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db, createDeck, deleteDeck, updateDeck, type Deck } from "@/lib/db";
 import CardEditor from "@/components/CardEditor";
 import AnkiImporter from "@/components/AnkiImporter";
+import AIGenerator from "@/components/AIGenerator";
 
 const inputCls =
   "w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-indigo-500 dark:border-slate-700";
@@ -75,6 +76,7 @@ function DeckListView({
   const [renamingId, setRenamingId] = useState<number | null>(null);
   const [renameValue, setRenameValue] = useState("");
   const [showImport, setShowImport] = useState(false);
+  const [showAI, setShowAI] = useState(false);
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
@@ -121,6 +123,9 @@ function DeckListView({
         </form>
         <button onClick={() => setShowImport(true)} className={btnGhost}>
           📦 Import Anki
+        </button>
+        <button onClick={() => setShowAI(true)} className={btnGhost}>
+          ✨ AI Generate
         </button>
         <div className="flex overflow-hidden rounded-lg border border-slate-300 dark:border-slate-700">
           {(["grid", "list"] as const).map((v) => (
@@ -206,6 +211,12 @@ function DeckListView({
           <AnkiImporter onDone={() => setShowImport(false)} />
         </Modal>
       )}
+
+      {showAI && (
+        <Modal title="AI Flashcard Generator" wide onClose={() => setShowAI(false)}>
+          <AIGenerator onDone={() => setShowAI(false)} />
+        </Modal>
+      )}
     </div>
   );
 }
@@ -269,7 +280,17 @@ function DeckRow({ deck, dueCount, onOpen, onRename, onDelete }: { deck: Deck; d
   );
 }
 
-function Modal({ title, children, onClose }: { title: string; children: React.ReactNode; onClose: () => void }) {
+function Modal({
+  title,
+  children,
+  onClose,
+  wide,
+}: {
+  title: string;
+  children: React.ReactNode;
+  onClose: () => void;
+  wide?: boolean;
+}) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
@@ -278,7 +299,9 @@ function Modal({ title, children, onClose }: { title: string; children: React.Re
       aria-modal="true"
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-5 shadow-xl dark:border-slate-800 dark:bg-slate-900"
+        className={`max-h-[90vh] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-5 shadow-xl dark:border-slate-800 dark:bg-slate-900 ${
+          wide ? "w-full max-w-3xl" : "w-full max-w-md"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="mb-3 text-lg font-semibold">{title}</h3>
