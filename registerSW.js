@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/astro-demo-project/sw.js', { scope: '/astro-demo-project/' })})}
