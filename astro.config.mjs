@@ -5,7 +5,9 @@ import AstroPWA from "@vite-pwa/astro";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://flashstack.app",
+  // Base path for GitHub Pages project site
+  base: "/astro-demo-project/",
+  site: "https://girishlade111.github.io/astro-demo-project/",
   integrations: [
     react(),
     AstroPWA({
@@ -18,12 +20,12 @@ export default defineConfig({
         theme_color: "#4f46e5",
         background_color: "#0f172a",
         display: "standalone",
-        start_url: "/app",
-        scope: "/",
+        start_url: "/astro-demo-project/app",
+        scope: "/astro-demo-project/",
         lang: "en",
         icons: [
           {
-            src: "/favicon.svg",
+            src: "/astro-demo-project/favicon.svg",
             sizes: "any",
             type: "image/svg+xml",
             purpose: "any maskable",
@@ -41,7 +43,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        navigateFallback: "/app",
+        navigateFallback: "/astro-demo-project/app",
         globPatterns: ["**/*.{js,css,html,svg,woff2,wasm}"],
         runtimeCaching: [
           {
